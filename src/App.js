@@ -2,7 +2,6 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 
 const Card = ({ data }) => {
-  // console.log(data);
   return (
     <li className="card" key={data.id}>
       <div className="userInfo">
@@ -17,35 +16,19 @@ const Card = ({ data }) => {
   );
 };
 
-/*
-    <li className="flex-1 mr-6 border-2 border-black rounded-sm" key={data.id}>
-      <div>ID: {data.id}</div>
-      <div className="">
-        <img src={data.avatar} alt="Avatar" className="avatar rounded-full" />
-      </div>
-      <div>
-        {data.first_name} {data.last_name}
-      </div>
-      <div>
-        <a href={"mailto:" + data.email} className="text-blue-500">
-          {data.email}
-        </a>
-      </div>
-    </li>
-
-*/
 const App = () => {
   const [userData, setUserData] = useState([]);
   const [numUsers, setNumUsers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [numPerPage, setNumPerPage] = useState(6);
 
-  const getData = async (page = 1) => {
+  const getData = async (page = 1, perPage = numPerPage) => {
     const res = await fetch(
-      `https://reqres.in/api/users?page=${page}&per_page=6`
+      `https://reqres.in/api/users?page=${page}&per_page=${perPage}`
     ).then((r) => r.json());
 
-    console.log('res: ', res);
+    // console.log('getData - res: ', res);
     setUserData(res.data);
     setNumUsers(Object.keys(res.data).length);
     setCurrentPage(page);
@@ -53,7 +36,6 @@ const App = () => {
   };
 
   const handlePrevious = (e) => {
-    console.log('handlePrevious called');
     e.preventDefault();
     if (currentPage !== 1) {
       getData(currentPage - 1);
@@ -72,20 +54,40 @@ const App = () => {
   return (
     <div className="App">
       <h2 className='text-left ml-24 font-bold text-2xl mb-6 mt-4'>{numUsers} Users</h2>
-      <div className="userListContainer m-auto ml-20">
+      <div className="userListContainer m-auto ml-20 mb-4">
         <ul className="userList">
           {userData.map((d) => {
             return <Card data={d} />;
           })}
         </ul>
       </div>
-      <div className='mt-4'>
-        <button type="button" onClick={handlePrevious} disabled={currentPage === 1} className='paginationButton'>
-          PREVIOUS
-        </button>
-        <button type="button" onClick={handleNext} disabled={currentPage === totalPages} className='paginationButton'>
-            NEXT
-        </button>
+      <div className='pagination m-auto mt-10 mb-20'>
+        <div className="paginationButtons">
+          <button type="button" onClick={handlePrevious} disabled={currentPage === 1} className='paginationButton'>
+            PREVIOUS
+          </button>
+            <button type="button" onClick={handleNext} disabled={currentPage === totalPages} className='paginationButton'>
+              NEXT
+          </button>
+        </div>
+        <div className='mr-24'>
+          <select 
+            className="paginationSelect"
+            value={numPerPage}
+            onChange={(e) => {
+              setNumPerPage(e.target.value);
+              console.log('numPerPage: ', numPerPage);
+              getData(1, e.target.value);
+            }}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
       </div>
     </div>
   );

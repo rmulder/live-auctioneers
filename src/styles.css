@@ -64,6 +64,18 @@
   text-decoration: none;
 }
 
+.pagination {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.paginationButtons {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
 .paginationButton {
   border: 1px solid #000;
   outline: 0;
@@ -85,4 +97,14 @@
   color: #aaa;
   border-color: #aaa;
   cursor: not-allowed;
+}
+
+.paginationSelect {
+  width: 170px;
+  height: 42px;
+  font-size: 16px;
+  line-height: 23px;
+  padding-left: 5px;
+  outline: 0;
+  border: 1px solid black;
 }
