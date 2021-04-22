@@ -1,0 +1,88 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.avatar {
+  margin: 0 auto;
+}
+
+.flex-1 {
+  max-width: 25%;
+}
+
+.userListContainer {
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+  justify-content: center;
+}
+
+.userList {
+  display: flex;
+  flex-flow: wrap;
+  list-style-type: none;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.card {
+  border: 1px solid #000;
+  box-shadow: 6px 6px 0 rgb(0 0 0 / 10%);
+  border-radius: 3px;
+  width: 380px;
+  height: 479px;
+  margin: 10px;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.id {
+  margin: 40px;
+}
+
+.profilePicture {
+  height: 180px;
+  width: 180px;
+  border: 1 px solid #000;
+  border-radius: 90px;
+}
+
+.name {
+  font-size: 30px;
+  line-height: 35px;
+  margin: 30px 0 10px;
+}
+
+.email a {
+  text-decoration: none;
+}
+
+.paginationButton {
+  border: 1px solid #000;
+  outline: 0;
+  margin-right: 20px;
+  background-color: #000;
+  color: #fff;
+  height: 60px;
+  width: 180px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.paginationButton:disabled {
+  background-color: #fff;
+  color: #aaa;
+  border-color: #aaa;
+  cursor: not-allowed;
+}
